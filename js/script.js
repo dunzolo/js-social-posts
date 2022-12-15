@@ -59,6 +59,9 @@ const posts = [
 let container = document.getElementById('container');
 
 posts.forEach((elem) => {
+    let array_created = elem.created.split('-');
+    let date_italy = `${array_created[2]}-${array_created[1]}-${array_created[0]}`;
+
     container.innerHTML += `
         <div class="post">
             <div class="post__header">
@@ -68,7 +71,7 @@ posts.forEach((elem) => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${elem.author.name}</div>
-                        <div class="post-meta__time">${elem.created}</div>
+                        <div class="post-meta__time">${date_italy}</div>
                     </div>                    
                 </div>
             </div>
