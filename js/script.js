@@ -62,12 +62,21 @@ posts.forEach((elem) => {
     let array_created = elem.created.split('-');
     let date_italy = `${array_created[2]}-${array_created[1]}-${array_created[0]}`;
 
+    let image;
+
+    if(elem.author.image == null){
+        image = textFallback(elem.author.name);
+    }
+    else{
+        image = `<img class="profile-pic" src="${elem.author.image}" alt="${elem.author.name}">`
+    }
+
     container.innerHTML += `
         <div class="post">
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src="${elem.author.image}" alt="Phil Mangione">                    
+                        ${image}                 
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${elem.author.name}</div>
@@ -124,4 +133,10 @@ for(let i = 0; i < likes_btn.length; i++){
         }
     })
     
+}
+
+function textFallback(name){
+    const array_name = name.split(' ');
+    name = `<h1 class="profile-pic color-black">${array_name[0][0]}${array_name[1][0]}</h1>`
+    return name;
 }
