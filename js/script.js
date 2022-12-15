@@ -79,13 +79,13 @@ posts.forEach((elem) => {
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#" data-postid="${elem.id}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="${elem.id}" class="js-likes-counter">${elem.likes}</b> persone
+                        Piace a <b id="like-counter-${elem.id}" class="js-likes-counter">${elem.likes}</b> persone
                     </div>
                 </div> 
             </div>            
@@ -93,28 +93,19 @@ posts.forEach((elem) => {
     `
 });
 
-let likes_btn = document.getElementsByClassName('likes__cta');
-console.log(likes_btn);
+let likes_btn = document.getElementsByClassName('js-like-button');
+
+const array_likes_clicked = [];
+
 for(let i = 0; i < likes_btn.length; i++){
-    i++;
-    likes_btn[i].id = i;
+
     likes_btn[i].addEventListener('click', function(){
-        console.log(likes_btn[i].id);
-        posts.forEach((elem) => {
-            switch(elem.id){
-                case 1:
-                    elem.likes++;
-                    console.log(elem.likes);
-                    break;
-                case 2:
-                    elem.likes++;
-                    console.log(elem.likes);
-                    break;
-                default:
-                    break;
-            }
-        })
-        
+        const postId = this.dataset.postid;
+        const likes = document.getElementById(`like-counter-${postId}`);
+        const likesNumber = parseInt(likes.innerText);
+        likes.innerText = likesNumber+1;
+        array_likes_clicked.push(postId);
+        console.log(array_likes_clicked);
     })
     
 }
