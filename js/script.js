@@ -95,17 +95,30 @@ posts.forEach((elem) => {
 
 let likes_btn = document.getElementsByClassName('js-like-button');
 
-const array_likes_clicked = [];
+let array_likes_clicked = [];
 
 for(let i = 0; i < likes_btn.length; i++){
 
     likes_btn[i].addEventListener('click', function(){
+
         const postId = this.dataset.postid;
         const likes = document.getElementById(`like-counter-${postId}`);
         const likesNumber = parseInt(likes.innerText);
-        likes.innerText = likesNumber+1;
-        array_likes_clicked.push(postId);
-        console.log(array_likes_clicked);
+
+        if(!(array_likes_clicked.includes(postId))){
+            likes.innerText = likesNumber+1;
+            array_likes_clicked.push(postId);
+            this.classList.add('clicked');
+        }
+        else{
+            this.classList.remove('clicked');
+            likes.innerText = likesNumber-1;
+            let array_remove_likes_clicked = array_likes_clicked.filter((elem) => {
+                if(array_likes_clicked.includes(elem))
+                    array_likes_clicked.splice(elem,1)
+            });
+            array_likes_clicked = array_remove_likes_clicked;
+        }
     })
     
 }
