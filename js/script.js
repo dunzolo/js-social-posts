@@ -85,10 +85,36 @@ posts.forEach((elem) => {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${elem.likes}</b> persone
+                        Piace a <b id="${elem.id}" class="js-likes-counter">${elem.likes}</b> persone
                     </div>
                 </div> 
             </div>            
         </div>
     `
-})
+});
+
+let likes_btn = document.getElementsByClassName('likes__cta');
+console.log(likes_btn);
+for(let i = 0; i < likes_btn.length; i++){
+    i++;
+    likes_btn[i].id = i;
+    likes_btn[i].addEventListener('click', function(){
+        console.log(likes_btn[i].id);
+        posts.forEach((elem) => {
+            switch(elem.id){
+                case 1:
+                    elem.likes++;
+                    console.log(elem.likes);
+                    break;
+                case 2:
+                    elem.likes++;
+                    console.log(elem.likes);
+                    break;
+                default:
+                    break;
+            }
+        })
+        
+    })
+    
+}
